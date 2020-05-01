@@ -1,0 +1,88 @@
+<script>
+/* Current bugs: Displays lose on tie when playerSelection is not perfectly typed
+                Shows normalize function on tie
+
+    Features needed: Display final score */
+
+    
+//plays the game and returns the winner
+function game() {
+    for (let i = 0; i < 5; i++) {
+        const playerSelection = prompt("So, whatcha gonna play? Rock, Paper, or Scissors?")
+        const computerSelection = computerPlay()
+        playRound(playerSelection, computerSelection);
+    }
+}
+
+
+//outputs given game outcome
+function playRound(playerSelection, computerSelection) {
+    if (playerWins(normalize(playerSelection), computerSelection) == 0) {
+        console.log(`You Won! ${playerSelection} beats ${computerSelection}`)
+    }
+    else if (playerWins(normalize(playerSelection), computerSelection) == 1){
+        console.log(`You Lose! ${computerSelection} beats ${playerSelection}`)
+    }
+    else {
+        console.log(`You Tied! ${computerSelection} is the same as ${normalize(playerSelection)}`)
+    }
+}
+
+//Returns 0 if player wins, 1 if computerselection wins, and 2 if it is a tie (2 is never returned)
+function playerWins(playerSelection, computerSelection) {
+    if (playerSelection == "Rock") {
+        if (computerSelection == "Scissors") {
+            return 0
+        }
+        else if (computerSelection == "Paper") {
+            return 1
+        }
+        else {
+            return 2
+        }
+    }
+    else if (playerSelection == "Paper") {
+        if (computerSelection == "Rock") {
+            return 0
+        }
+        else if (computerSelection == "Scissors") {
+            return 1
+        }
+        else {
+            return 2
+        }
+    }
+    else {
+        if (computerSelection == "Paper") {
+            return 0
+        }
+        else if (computerSelection == "Rock") {
+            return 1
+        }
+        else {
+            return 2
+        }
+    }
+}
+
+function normalize(choice) {
+    return choice.charAt(0).toUpperCase() + choice.slice(1).toLowerCase
+}
+
+//generates computer's move
+function computerPlay() {    
+    num = Math.floor(Math.random() * 3)
+        if (num < 1) {
+            return "Rock"
+        }
+        else if (num < 2) {
+            return "Paper"
+        }
+        else {
+            return "Scissors"
+        }
+    }
+
+console.log(game())
+
+</script>
